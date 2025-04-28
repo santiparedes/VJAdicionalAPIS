@@ -12,7 +12,6 @@ namespace VJAdicionalapis.Controllers
     public class NotasIrregularidadesController : ControllerBase
     {
         private readonly string connectionString = "Server=blah;Port=12345;Database=quiensabe;Uid=nose;password=dokioe;";
-
     [HttpPost]
     public IActionResult CrearNotaIrregularidad([FromBody] NotaIrregularidad nuevaNota)
     {
