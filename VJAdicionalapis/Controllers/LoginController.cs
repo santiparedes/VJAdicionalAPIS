@@ -7,6 +7,7 @@ using System.Data;
 [Route("[controller]")]
 public class OxxoController : ControllerBase
 {
+    string connectionString = "Server=;placeholder";
 
 
 
