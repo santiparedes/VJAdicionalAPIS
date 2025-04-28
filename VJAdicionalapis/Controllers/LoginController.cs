@@ -7,8 +7,7 @@ using System.Data;
 [Route("[controller]")]
 public class OxxoController : ControllerBase
 {
-    string connectionString = "Server=;placeholder";
-
+    string connectionString = "Placeholder";
 
 
     [Route("VerificarUsuario/{usrName}/{contra}")]
