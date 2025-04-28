@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using VJAdicionalapis.Models;
 
+
 namespace VJAdicionalapis.Controllers
 {
     [ApiController]
@@ -12,9 +13,17 @@ namespace VJAdicionalapis.Controllers
     {
         private readonly string connectionString = "Server=blah;Port=12345;Database=quiensabe;Uid=nose;password=dokioe;";
 
-        [HttpPost]
+    [HttpPost]
     public IActionResult CrearNotaIrregularidad([FromBody] NotaIrregularidad nuevaNota)
     {
+        Console.WriteLine($"Received: {System.Text.Json.JsonSerializer.Serialize(nuevaNota)}");
+
+        
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(new { message = "Invalid model", errors = ModelState });
+        }
+
         try
         {
             using (var conexion = new MySqlConnection(connectionString))
@@ -23,13 +32,15 @@ namespace VJAdicionalapis.Controllers
                 using (var cmd = new MySqlCommand())
                 {
                     cmd.Connection = conexion;
-                    cmd.CommandText = @"INSERT INTO NotasIrregularidades (tienda, descripcion, tipo_irregularidad, id_usuario)
-                                        VALUES (@tienda, @descripcion, @tipoIrregularidad, @idUsuario)";
+                    cmd.CommandText = @"INSERT INTO NotasIrregularidades (tienda, descripcion, fecha, tipo_irregularidad, id_usuario)
+                                        VALUES (@tienda, @descripcion, @fecha, @tipoIrregularidad, @idUsuario)";
                     
                     cmd.Parameters.AddWithValue("@tienda", nuevaNota.Tienda);
                     cmd.Parameters.AddWithValue("@descripcion", nuevaNota.Descripcion);
+                    cmd.Parameters.AddWithValue("@fecha", DateTime.UtcNow);
                     cmd.Parameters.AddWithValue("@tipoIrregularidad", nuevaNota.TipoIrregularidad);
                     cmd.Parameters.AddWithValue("@idUsuario", nuevaNota.IdUsuario);
+                    
 
                     cmd.ExecuteNonQuery();
                 }
