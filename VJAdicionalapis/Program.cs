@@ -7,6 +7,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddHttpsRedirection(options =>
+{
+    options.HttpsPort = 7258;
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -23,4 +28,3 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
-

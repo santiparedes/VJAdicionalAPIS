@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("VJAdicionalapis")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2dfc3d925e0fc0ec9a1c2cc85888cbd904277e9c")]
 [assembly: System.Reflection.AssemblyProductAttribute("VJAdicionalapis")]
 [assembly: System.Reflection.AssemblyTitleAttribute("VJAdicionalapis")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
