@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/Users/santipa/Desktop/APIS/VJAdicional/VJAdicionalAPIS/VJAdicionalapis/VJAdicionalapis.csproj": {}
+    "/Users/salvadorancer/Documents/GitHub/VJAdicionalAPIS/VJAdicionalapis/VJAdicionalapis.csproj": {}
   },
   "projects": {
-    "/Users/santipa/Desktop/APIS/VJAdicional/VJAdicionalAPIS/VJAdicionalapis/VJAdicionalapis.csproj": {
+    "/Users/salvadorancer/Documents/GitHub/VJAdicionalAPIS/VJAdicionalapis/VJAdicionalapis.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/santipa/Desktop/APIS/VJAdicional/VJAdicionalAPIS/VJAdicionalapis/VJAdicionalapis.csproj",
+        "projectUniqueName": "/Users/salvadorancer/Documents/GitHub/VJAdicionalAPIS/VJAdicionalapis/VJAdicionalapis.csproj",
         "projectName": "VJAdicionalapis",
-        "projectPath": "/Users/santipa/Desktop/APIS/VJAdicional/VJAdicionalAPIS/VJAdicionalapis/VJAdicionalapis.csproj",
-        "packagesPath": "/Users/santipa/.nuget/packages/",
-        "outputPath": "/Users/santipa/Desktop/APIS/VJAdicional/VJAdicionalAPIS/VJAdicionalapis/obj/",
+        "projectPath": "/Users/salvadorancer/Documents/GitHub/VJAdicionalAPIS/VJAdicionalapis/VJAdicionalapis.csproj",
+        "packagesPath": "/Users/salvadorancer/.nuget/packages/",
+        "outputPath": "/Users/salvadorancer/Documents/GitHub/VJAdicionalAPIS/VJAdicionalapis/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/santipa/.nuget/NuGet/NuGet.Config"
+          "/Users/salvadorancer/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -76,7 +76,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.202/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
