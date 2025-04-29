@@ -2,8 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using VJAdicionalapis.Models;
-
 
 namespace VJAdicionalapis.Controllers
 {
@@ -12,103 +12,80 @@ namespace VJAdicionalapis.Controllers
     public class NotasIrregularidadesController : ControllerBase
     {
         private readonly string connectionString = "PlaceHolder";
-    [HttpPost]
-    public IActionResult CrearNotaIrregularidad([FromBody] NotaIrregularidad nuevaNota)
-    {
-        Console.WriteLine($"Received: {System.Text.Json.JsonSerializer.Serialize(nuevaNota)}");
 
-        
-        if (!ModelState.IsValid)
+        // Método para crear una nueva nota de irregularidad
+        [HttpPost]
+        public IActionResult CrearNotaIrregularidad([FromBody] NotaIrregularidad nuevaNota)
         {
-            return BadRequest(new { message = "Invalid model", errors = ModelState });
-        }
-
-        try
-        {
-            using (var conexion = new MySqlConnection(connectionString))
+            try
             {
-                conexion.Open();
-                using (var cmd = new MySqlCommand())
+                using (var conexion = new MySqlConnection(connectionString))
                 {
-                    cmd.Connection = conexion;
-                    cmd.CommandText = @"INSERT INTO NotasIrregularidades (tienda, descripcion, fecha, tipo_irregularidad, id_usuario)
-                                        VALUES (@tienda, @descripcion, @fecha, @tipoIrregularidad, @idUsuario)";
-                    
-                    cmd.Parameters.AddWithValue("@tienda", nuevaNota.Tienda);
-                    cmd.Parameters.AddWithValue("@descripcion", nuevaNota.Descripcion);
-                    cmd.Parameters.AddWithValue("@fecha", DateTime.UtcNow);
-                    cmd.Parameters.AddWithValue("@tipoIrregularidad", nuevaNota.TipoIrregularidad);
-                    cmd.Parameters.AddWithValue("@idUsuario", nuevaNota.IdUsuario);
-                    
+                    conexion.Open();
+                    using (var cmd = new MySqlCommand("SP_PostNotasIrregularidades", conexion))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
 
-                    cmd.ExecuteNonQuery();
+                        // Asignación de parámetros
+                        cmd.Parameters.AddWithValue("p_tienda", nuevaNota.Tienda);
+                        cmd.Parameters.AddWithValue("p_descripcion", nuevaNota.Descripcion);
+                        cmd.Parameters.AddWithValue("p_fecha", DateTime.UtcNow);
+                        cmd.Parameters.AddWithValue("p_tipoIrregularidad", nuevaNota.TipoIrregularidad);
+                        cmd.Parameters.AddWithValue("p_idUsuario", nuevaNota.IdUsuario);
+
+                        // Ejecuta el procedimiento almacenado
+                        cmd.ExecuteNonQuery();
+                    }
                 }
+                return Ok(new { message = "Nota registrada exitosamente." });
             }
-            return Ok(new { message = "Nota registrada exitosamente." });
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(500, new { message = "Error al registrar la nota.", error = ex.Message });
-        }
-    }
-
-    [HttpGet]
-    public IActionResult GetNotasIrregularidades([FromQuery] string tienda, [FromQuery] string tipoIrregularidad)
-    {
-        try
-        {
-            var notas = new List<NotaIrregularidad>();
-            using (var conexion = new MySqlConnection(connectionString))
+            catch (Exception ex)
             {
-                conexion.Open();
-                using (var cmd = new MySqlCommand())
+                return StatusCode(500, new { message = "Error al registrar la nota.", error = ex.Message });
+            }
+        }
+
+        // Método para obtener las notas de irregularidades
+        [HttpGet]
+        public IActionResult GetNotasIrregularidades([FromQuery] string tienda, [FromQuery] string tipoIrregularidad)
+        {
+            try
+            {
+                var notas = new List<NotaIrregularidad>();
+
+                using (var conexion = new MySqlConnection(connectionString))
                 {
-                    cmd.Connection = conexion;
+                    conexion.Open();
+                    using (var cmd = new MySqlCommand("SP_GetNotasIrregularidades", conexion))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
 
-                    if (!string.IsNullOrEmpty(tienda) && !string.IsNullOrEmpty(tipoIrregularidad))
-                    {
-                        cmd.CommandText = @"SELECT id_notas, tienda, descripcion, fecha, tipo_irregularidad 
-                                            FROM NotasIrregularidades 
-                                            WHERE tienda = @tienda AND tipo_irregularidad = @tipoIrregularidad";
-                        cmd.Parameters.AddWithValue("@tienda", tienda);
-                        cmd.Parameters.AddWithValue("@tipoIrregularidad", tipoIrregularidad);
-                    }
-                    else if (!string.IsNullOrEmpty(tienda))
-                    {
-                        cmd.CommandText = @"SELECT id_notas, tienda, descripcion, fecha, tipo_irregularidad 
-                                            FROM NotasIrregularidades 
-                                            WHERE tienda = @tienda";
-                        cmd.Parameters.AddWithValue("@tienda", tienda);
-                    }
-                    else
-                    {
-                        cmd.CommandText = @"SELECT id_notas, tienda, descripcion, fecha, tipo_irregularidad 
-                                            FROM NotasIrregularidades";
-                    }
+                        // Asignación de parámetros
+                        cmd.Parameters.AddWithValue("p_tienda", tienda ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("p_tipoIrregularidad", tipoIrregularidad ?? (object)DBNull.Value);
 
-                    cmd.Prepare();
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
+                        using (var reader = cmd.ExecuteReader())
                         {
-                            notas.Add(new NotaIrregularidad
+                            while (reader.Read())
                             {
-                                IdNotas = reader.GetInt32("id_notas"),
-                                Tienda = reader.GetString("tienda"),
-                                Descripcion = reader.GetString("descripcion"),
-                                Fecha = reader.GetDateTime("fecha"),
-                                TipoIrregularidad = reader.GetString("tipo_irregularidad")
-                            });
+                                notas.Add(new NotaIrregularidad
+                                {
+                                    IdNotas = reader.GetInt32("id_notas"),
+                                    Tienda = reader.GetString("tienda"),
+                                    Descripcion = reader.GetString("descripcion"),
+                                    Fecha = reader.GetDateTime("fecha"),
+                                    TipoIrregularidad = reader.GetString("tipo_irregularidad")
+                                });
+                            }
                         }
                     }
                 }
+                return Ok(notas);
             }
-            return Ok(notas);
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(500, new { message = "Error al obtener las notas irregularidades.", error = ex.Message });
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Error al obtener las notas irregularidades.", error = ex.Message });
+            }
         }
     }
-    }
-} 
+}
