@@ -11,7 +11,7 @@ namespace VJAdicionalapis.Controllers
     [Route("api/[controller]")]
     public class NotasIrregularidadesController : ControllerBase
     {
-        private readonly string connectionString = "Placeholder";
+        private readonly string connectionString = "PlaceHolder";
     [HttpPost]
     public IActionResult CrearNotaIrregularidad([FromBody] NotaIrregularidad nuevaNota)
     {
