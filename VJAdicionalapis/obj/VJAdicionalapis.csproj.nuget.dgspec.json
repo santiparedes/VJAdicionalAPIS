@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/Users/salvadorancer/Documents/GitHub/VJAdicionalAPIS/VJAdicionalapis/VJAdicionalapis.csproj": {}
+    "C:\\Users\\gpaol\\OneDrive\\Documents\\Desktop\\VJAdicionalAPIS\\VJAdicionalapis\\VJAdicionalapis.csproj": {}
   },
   "projects": {
-    "/Users/salvadorancer/Documents/GitHub/VJAdicionalAPIS/VJAdicionalapis/VJAdicionalapis.csproj": {
+    "C:\\Users\\gpaol\\OneDrive\\Documents\\Desktop\\VJAdicionalAPIS\\VJAdicionalapis\\VJAdicionalapis.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/salvadorancer/Documents/GitHub/VJAdicionalAPIS/VJAdicionalapis/VJAdicionalapis.csproj",
+        "projectUniqueName": "C:\\Users\\gpaol\\OneDrive\\Documents\\Desktop\\VJAdicionalAPIS\\VJAdicionalapis\\VJAdicionalapis.csproj",
         "projectName": "VJAdicionalapis",
-        "projectPath": "/Users/salvadorancer/Documents/GitHub/VJAdicionalAPIS/VJAdicionalapis/VJAdicionalapis.csproj",
-        "packagesPath": "/Users/salvadorancer/.nuget/packages/",
-        "outputPath": "/Users/salvadorancer/Documents/GitHub/VJAdicionalAPIS/VJAdicionalapis/obj/",
+        "projectPath": "C:\\Users\\gpaol\\OneDrive\\Documents\\Desktop\\VJAdicionalAPIS\\VJAdicionalapis\\VJAdicionalapis.csproj",
+        "packagesPath": "C:\\Users\\gpaol\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\gpaol\\OneDrive\\Documents\\Desktop\\VJAdicionalAPIS\\VJAdicionalapis\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/salvadorancer/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\gpaol\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -76,7 +76,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.202/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

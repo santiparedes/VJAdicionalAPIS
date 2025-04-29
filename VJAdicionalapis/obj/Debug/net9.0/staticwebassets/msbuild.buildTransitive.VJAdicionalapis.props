@@ -1,3 +1,3 @@
 ﻿<Project>
-  <Import Project="../buildMultiTargeting/VJAdicionalapis.props" />
+  <Import Project="..\buildMultiTargeting\VJAdicionalapis.props" />
 </Project>
